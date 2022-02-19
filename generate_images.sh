@@ -8,7 +8,9 @@ sed -e 's|#system_freetype = False|system_freetype = True|' -e 's|#system_qhull 
 sed -i 's|#tests = False|tests = True|' mplsetup.cfg
 python3 setup.py build
 python3 setup.py install --skip-build
-python3 -m pytest -n $(nproc) --pyargs matplotlib mpl_toolkits.tests
+job_count_prelim=$(nproc)
+job_count=$((job_count_prelim<12 ? job_count_prelim : 12))
+python3 -m pytest -n $job_count --pyargs matplotlib mpl_toolkits.tests
 cd result_images
 find . -name *expected* -exec rm -rf {} \;
 mpl_toolkits_folders="test_axes_grid
@@ -21,13 +23,13 @@ mpl_toolkits_folders="test_axes_grid
     test_mplot3d
     "
 mkdir ../../output
-mkdir ../../output/mpl_toolkits-x86_64
-mkdir ../../output/matplotlib-x86_64
+mkdir ../../output/mpl_toolkits
+mkdir ../../output/matplotlib
 for mpl_toolkit_folder in $mpl_toolkits_folders
 do
     mv ./$mpl_toolkit_folder ../../output/mpl_toolkits/$mpl_toolkit_folder
 done
 for directory in ./*
 do
-    mv ./$directory ../../output/matplotlib/$directory
+    mv $directory ../../output/matplotlib/$directory
 done
