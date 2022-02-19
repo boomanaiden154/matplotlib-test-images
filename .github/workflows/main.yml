@@ -5,8 +5,10 @@ jobs:
     runs-on: ubuntu-latest
     name: testing
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
       - name: Hello World
-        uses: ./hello-world-docker-action
+        uses: ./.github/actions/hello-world-docker-action
         id: hello
       - name: Show file contents
         run: cat testing
