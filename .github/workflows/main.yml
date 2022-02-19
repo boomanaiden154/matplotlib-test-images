@@ -27,7 +27,7 @@ jobs:
           mkdir ./matplotlib-images-3.5.1
           mv output-x86_64/mpl_toolkits ./matplotlib-images-3.5.1/mpl_toolkits-x86_64
           mv output-x86_64/matplotlib ./matplotlib-images-3.5.1/matplotlib-x86_64
-          tar -cxvf matplotlib-images-3.5.1.tar.gz ./matplotlib-images-3.5.1
+          tar -czvf matplotlib-images-3.5.1.tar.gz ./matplotlib-images-3.5.1
       - name: create release
         uses: ncipollo/release-action@v1
         with:
