@@ -7,8 +7,10 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-      - name: Hello World
-        uses: ./.github/actions/hello-world-docker-action
+      - name: Build x86_64
+        uses: ./.github/actions/export-test-images-x86_64
         id: hello
-      - name: Show file contents
-        run: cat testing
+      - name: Upload Artifacts
+        with:
+          name: output
+          path: output.tar.gz
