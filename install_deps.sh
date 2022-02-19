@@ -1,5 +1,5 @@
-FROM alpine:edge
-RUN apk add python3-dev \
+#!/bin/sh
+apk add python3-dev \
 	gfortran \
 	py3-numpy-dev \
 	freetype-dev \
@@ -25,5 +25,3 @@ RUN apk add python3-dev \
 	py3-tz \
 	python3-tkinter \
     alpine-sdk
-COPY entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]

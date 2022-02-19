@@ -1,17 +1,39 @@
 on: [push]
 
 jobs:
-  hello_world_job:
+  build:
     runs-on: ubuntu-latest
     name: testing
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-      - name: Build x86_64
+      - name: Generate Images
         uses: ./.github/actions/export-test-images-x86_64
-        id: hello
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: output
+          name: output-x86_64
           path: output/
+  build-alternative-arches:
+    name: build-alternative-arches
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: ["x86","aarch64","ppc64le","s390x","armv7"]
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - uses: uraimo/run-on-arch-action@v2
+        name: Generate Images
+        with:
+          arch: ${{ matrix.arch }}
+          distro: alpine_latest
+          run: |
+            ./update_to_edge.sh
+            ./install_deps.sh
+            ./generate_images.sh
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: output-${{ matrix.arch }}
+          path: output/ 

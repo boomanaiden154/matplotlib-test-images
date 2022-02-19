@@ -1,5 +1,5 @@
-name: "Hello World"
-description: "Basic testing"
+name: "x86_64 image generator"
+description: "Generates images on x86_64"
 runs:
   using: "docker"
-  image: "Dockerfile"
+  image: "../../../Dockerfile"
