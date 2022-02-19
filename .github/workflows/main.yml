@@ -1,5 +1,8 @@
 on: [push]
 
+env:
+  matplotlib_version: 3.5.1
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,15 +27,15 @@ jobs:
       - name: create .tar.gz archive
         shell: bash
         run: |
-          mkdir ./matplotlib-images-3.5.1
-          mv output-x86_64/mpl_toolkits ./matplotlib-images-3.5.1/mpl_toolkits-x86_64
-          mv output-x86_64/matplotlib ./matplotlib-images-3.5.1/matplotlib-x86_64
-          tar -czvf matplotlib-images-3.5.1.tar.gz ./matplotlib-images-3.5.1
+          mkdir ./matplotlib-images
+          mv output-x86_64/mpl_toolkits ./matplotlib-images/mpl_toolkits-x86_64
+          mv output-x86_64/matplotlib ./matplotlib-images/matplotlib-x86_64
+          tar -czvf matplotlib-images.tar.gz ./matplotlib-images
       - name: create release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "matplotlib-images-3.5.1.tar.gz"
+          artifacts: 'matplotlib-images.tar.gz'
           token: ${{ secrets.GITHUB_TOKEN }}
           draft: true
           commit: main
-          tag: matplotlib-3.5.1
+          tag: matplotlib-${{ env.matplotlib_version }}

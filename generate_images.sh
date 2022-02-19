@@ -1,5 +1,5 @@
 #!/bin/sh
-version=3.5.1
+version=$matplotlib_version
 curl -L https://github.com/matplotlib/matplotlib/archive/refs/tags/v$version.tar.gz > matplotlib-$version.tar.gz
 tar -xf matplotlib-$version.tar.gz
 rm matplotlib-$version.tar.gz
