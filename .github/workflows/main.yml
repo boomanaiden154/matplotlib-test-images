@@ -47,7 +47,20 @@ jobs:
       - name: create .tar.gz archive
         shell: bash
         run: |
-          tar -cxvf matplotlib-images-3.5.1.tar.gz ./output-*
+          mkdir ./matplotlib-images-3.5.1
+          mv output-aarch64/mpl_toolkits ./matplotlib-images-3.5.1/mpl_toolkits-aarch64
+          mv output-aarch64/matplotlib ./matplotlib-images-3.5.1/matplotlib-aarch64
+          mv output-armv7/mpl_toolkits ./matplotlib-images-3.5.1/mpl_toolkits-armv7
+          mv output-armv7/matplotlib ./matplotlib-images-3.5.1/matplotlib-armv7
+          mv output-i386/mpl_toolkits ./matplotlib-images-3.5.1/mpl_toolkits-x86
+          mv output-i386/matplotlib ./matplotlib-images-3.5.1/matplotlib-x86
+          mv output-ppc64le/mpl_toolkits ./matplotlib-images-3.5.1/mpl_toolkits-ppc64le
+          mv output-ppc64le/matplotlib ./matplotlib-images-3.5.1/matplotlib-ppc64le
+          mv output-s390x/mpl_toolkits ./matplotlib-images-3.5.1/mpl_toolkits-s390x
+          mv output-s390x/matplotlib ./matplotlib-images-3.5.1/matplotlib-s390x
+          mv output-x86_64/mpl_toolkits ./matplotlib-images-3.5.1/mpl_toolkits-x86_64
+          mv output-x86_64/matplotlib ./matplotlib-images-3.5.1/matplotlib-x86_64
+          tar -cxvf matplotlib-images-3.5.1.tar.gz ./matplotlib-images-3.5.1
       - name: create release
         uses: ncipollo/release-action@v1
         with:

@@ -25,9 +25,9 @@ mkdir ../../output/mpl_toolkits-x86_64
 mkdir ../../output/matplotlib-x86_64
 for mpl_toolkit_folder in $mpl_toolkits_folders
 do
-    mv ./$mpl_toolkit_folder ../../output/mpl_toolkits-x86_64/$mpl_toolkit_folder
+    mv ./$mpl_toolkit_folder ../../output/mpl_toolkits/$mpl_toolkit_folder
 done
 for directory in ./*
 do
-    mv ./$directory ../../output/matplotlib-x86_64/$directory
+    mv ./$directory ../../output/matplotlib/$directory
 done
