@@ -3,7 +3,7 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: testing
+    name: build
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
