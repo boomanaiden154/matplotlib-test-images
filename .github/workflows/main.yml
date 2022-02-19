@@ -11,6 +11,7 @@ jobs:
         uses: ./.github/actions/export-test-images-x86_64
         id: hello
       - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
         with:
           name: output
           path: output.tar.gz
