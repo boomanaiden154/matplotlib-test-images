@@ -31,7 +31,3 @@ for directory in ./*
 do
     mv ./$directory ../../output/matplotlib-x86_64/$directory
 done
-cd ../../
-tar -czvf output.tar.gz ./output
-rm -rf ./matplotlib-$version
-rm -rf ./output
