@@ -36,4 +36,20 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: output-${{ matrix.arch }}
-          path: output/ 
+          path: output/
+  create-release:
+    name: create-release
+    runs-on: ubuntu-latest
+    needs: [build, build-alternative-arches]
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+      - name: create .tar.gz archive
+        shell: bash
+        run: |
+          tar -cxvf matplotlib-images-3.5.1.tar.gz ./output-*
+      - name: create release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "matplotlib-images-3.5.1.tar.gz"
+          token: ${{ secrets.GITHUB_TOKEN }}
