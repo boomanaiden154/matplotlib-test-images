@@ -33,3 +33,6 @@ jobs:
         with:
           artifacts: "matplotlib-images-3.5.1.tar.gz"
           token: ${{ secrets.GITHUB_TOKEN }}
+          draft: true
+          commit: main
+          tag: matplotlib-3.5.1
