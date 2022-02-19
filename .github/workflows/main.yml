@@ -31,6 +31,8 @@ jobs:
         with:
           arch: ${{ matrix.arch }}
           distro: alpine_latest
+          env: |
+            matplotlib_version: ${{ env.matplotlib_version }}
           run: |
             ./update_to_edge.sh
             ./install_deps.sh
