@@ -20,7 +20,7 @@ jobs:
   create-release:
     name: create-release
     runs-on: ubuntu-latest
-    needs: [build,build-alternative-arches]
+    needs: [build]
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v2
