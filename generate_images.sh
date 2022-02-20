@@ -14,7 +14,7 @@ python3 -m pytest -n $job_count --pyargs matplotlib mpl_toolkits.tests
 cd result_images
 find . -name *expected* -exec rm -rf {} \;
 find . -name *failed-diff* -exec rm -rf {} \;
-find . -name "*[png]*" -exec -rm -rf {} \;
+find . -name "*\[png\]*" -exec rm -rf {} \;
 mpl_toolkits_folders="test_axes_grid
     test_axes_grid1
     test_axisartist_axis_artist
