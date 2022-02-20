@@ -57,8 +57,8 @@ jobs:
           mv output-x86_64/matplotlib ./matplotlib-images/matplotlib-x86_64
           mv output-aarch64/mpl_toolkits ./matplotlib-images/mpl_toolkits-aarch64
           mv output-aarch64/matplotlib ./matplotlib-images/matplotlib-aarch64
-          mv output-armv7/mpl_toolkits ./matplotlib-images/mpl_toolkits-armv7
-          mv output-armv7/matplotlib ./matplotlib-images/matplotlib-armv7
+          cp -r output-armv7/mpl_toolkits ./matplotlib-images/mpl_toolkits-armv7
+          cp -r output-armv7/matplotlib ./matplotlib-images/matplotlib-armv7
           mv output-armv7/mpl_toolkits ./matplotlib-images/mpl_toolkits-armhf
           mv output-armv7/matplotlib ./matplotlib-images/matplotlib-armhf
           mv output-i386/mpl_toolkits ./matplotlib-images/mpl_toolkits-x86
