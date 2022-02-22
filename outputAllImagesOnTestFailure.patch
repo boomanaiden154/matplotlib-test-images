@@ -7,7 +7,7 @@ index d9285d9..9c43148 100644
                  plt.close(fig)
              expected_path = self.copy_baseline(baseline, extension)
 -            _raise_on_image_difference(expected_path, actual_path, self.tol)
-+            return (expected_path, actual_path, self.tol)
++            return expected_path, actual_path, self.tol
  
  
  def _pytest_image_comparison(baseline_images, extensions, tol,
@@ -20,7 +20,7 @@ index d9285d9..9c43148 100644
 -                img.compare(fig, baseline, extension, _lock=needs_lock)
 +                comparisonResults.append(img.compare(fig, baseline, extension, _lock=needs_lock))
 +            for comparisonResult in comparisonResults:
-+                _raise_on_image_difference(comparisonResult[0], comparisonResult[1], comparisonResult[2])
++                _raise_on_image_difference(*comparisonResult)
  
          parameters = list(old_sig.parameters.values())
          if 'extension' not in old_sig.parameters:
