@@ -1,24 +1,22 @@
-diff --git a/lib/matplotlib/testing/decorators.py b/lib/matplotlib/testing/decorators.py
-index d9285d9..9c43148 100644
 --- a/lib/matplotlib/testing/decorators.py
 +++ b/lib/matplotlib/testing/decorators.py
-@@ -221,7 +221,7 @@ class _ImageComparisonBase:
-                 # makes things more convenient for third-party users.
-                 plt.close(fig)
+@@ -198,7 +198,7 @@
+         with lock:
+             fig.savefig(actual_path, **kwargs)
              expected_path = self.copy_baseline(baseline, extension)
 -            _raise_on_image_difference(expected_path, actual_path, self.tol)
 +            return expected_path, actual_path, self.tol
  
  
  def _pytest_image_comparison(baseline_images, extensions, tol,
-@@ -280,8 +280,11 @@ def _pytest_image_comparison(baseline_images, extensions, tol,
-             assert len(figs) == len(our_baseline_images), (
+@@ -255,8 +255,11 @@
+             assert len(plt.get_fignums()) == len(our_baseline_images), (
                  "Test generated {} images but there are {} baseline images"
-                 .format(len(figs), len(our_baseline_images)))
+                 .format(len(plt.get_fignums()), len(our_baseline_images)))
 +            comparisonResults = []
-             for fig, baseline in zip(figs, our_baseline_images):
--                img.compare(fig, baseline, extension, _lock=needs_lock)
-+                comparisonResults.append(img.compare(fig, baseline, extension, _lock=needs_lock))
+             for idx, baseline in enumerate(our_baseline_images):
+-                img.compare(idx, baseline, extension, _lock=needs_lock)
++                comparisonResults.append(img.compare(idx, baseline, extension, _lock=needs_lock))
 +            for comparisonResult in comparisonResults:
 +                _raise_on_image_difference(*comparisonResult)
  

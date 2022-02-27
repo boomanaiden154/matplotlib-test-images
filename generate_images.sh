@@ -36,3 +36,7 @@ for directory in ./*
 do
     mv $directory ../../output/matplotlib/$directory
 done
+for compare_test in /test_compare_images/*
+do
+    cp $compare_test /output/matplotlib/test_compare_images/$(basename $compare_test)
+done
