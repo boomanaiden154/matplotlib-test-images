@@ -4,25 +4,12 @@ env:
   matplotlib_version: 3.5.1
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    name: build
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-      - name: Generate Images
-        uses: ./.github/actions/export-test-images-x86_64
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: output-x86_64
-          path: output/
-  build-alternative-arches:
+  build-arches:
     name: build-alternative-arches
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        arch: ["i386"]
+        arch: ["i386", "x86_64"]
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -45,7 +32,7 @@ jobs:
   create-release:
     name: create-release
     runs-on: ubuntu-latest
-    needs: [build, build-alternative-arches]
+    needs: [build-arches]
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v2
@@ -53,20 +40,20 @@ jobs:
         shell: bash
         run: |
           mkdir ./matplotlib-images
-          mv output-x86_64/mpl_toolkits ./matplotlib-images/mpl_toolkits-x86_64
-          mv output-x86_64/matplotlib ./matplotlib-images/matplotlib-x86_64
-          mv output-aarch64/mpl_toolkits ./matplotlib-images/mpl_toolkits-aarch64
-          mv output-aarch64/matplotlib ./matplotlib-images/matplotlib-aarch64
-          cp -r output-armv7/mpl_toolkits ./matplotlib-images/mpl_toolkits-armv7
-          cp -r output-armv7/matplotlib ./matplotlib-images/matplotlib-armv7
-          mv output-armv7/mpl_toolkits ./matplotlib-images/mpl_toolkits-armhf
-          mv output-armv7/matplotlib ./matplotlib-images/matplotlib-armhf
-          mv output-i386/mpl_toolkits ./matplotlib-images/mpl_toolkits-x86
-          mv output-i386/matplotlib ./matplotlib-images/matplotlib-x86
-          mv output-ppc64le/mpl_toolkits ./matplotlib-images/mpl_toolkits-ppc64le
-          mv output-ppc64le/matplotlib ./matplotlib-images/matplotlib-ppc64le
-          mv output-s390x/mpl_toolkits ./matplotlib-images/mpl_toolkits-s390x
-          mv output-s390x/matplotlib ./matplotlib-images/matplotlib-s390x
+          mv output-x86_64/mpl_toolkits ./matplotlib-images/mpl_toolkits-x86_64 || true
+          mv output-x86_64/matplotlib ./matplotlib-images/matplotlib-x86_64 || true
+          mv output-aarch64/mpl_toolkits ./matplotlib-images/mpl_toolkits-aarch64 || true
+          mv output-aarch64/matplotlib ./matplotlib-images/matplotlib-aarch64 || true
+          cp -r output-armv7/mpl_toolkits ./matplotlib-images/mpl_toolkits-armv7 || true
+          cp -r output-armv7/matplotlib ./matplotlib-images/matplotlib-armv7 || true
+          mv output-armv7/mpl_toolkits ./matplotlib-images/mpl_toolkits-armhf || true
+          mv output-armv7/matplotlib ./matplotlib-images/matplotlib-armhf || true
+          mv output-i386/mpl_toolkits ./matplotlib-images/mpl_toolkits-x86 || true
+          mv output-i386/matplotlib ./matplotlib-images/matplotlib-x86 || true
+          mv output-ppc64le/mpl_toolkits ./matplotlib-images/mpl_toolkits-ppc64le || true
+          mv output-ppc64le/matplotlib ./matplotlib-images/matplotlib-ppc64le || true
+          mv output-s390x/mpl_toolkits ./matplotlib-images/mpl_toolkits-s390x || true
+          mv output-s390x/matplotlib ./matplotlib-images/matplotlib-s390x || true
           tar -czvf matplotlib-images.tar.gz ./matplotlib-images
       - name: create release
         uses: ncipollo/release-action@v1
