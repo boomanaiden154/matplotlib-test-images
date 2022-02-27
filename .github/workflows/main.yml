@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        arch: ["aarch64","ppc64le","s390x","armv7","i386"]
+        arch: ["i386"]
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
