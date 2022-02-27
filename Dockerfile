@@ -4,5 +4,4 @@ COPY install_deps.sh /install_deps.sh
 COPY generate_images.sh /generate_images.sh
 COPY entrypoint.sh /entrypoint.sh
 COPY outputAllImagesOnTestFailure.patch /outputAllImagesOnTestFailure.patch
-COPY test_compare_images /test_compare_images
 ENTRYPOINT ["/entrypoint.sh"]
