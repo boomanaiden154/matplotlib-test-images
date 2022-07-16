@@ -54,6 +54,8 @@ jobs:
           mv output-ppc64le/matplotlib ./matplotlib-images/matplotlib-ppc64le || true
           mv output-s390x/mpl_toolkits ./matplotlib-images/mpl_toolkits-s390x || true
           mv output-s390x/matplotlib ./matplotlib-images/matplotlib-s390x || true
+          mv output-riscv64/mpl_toolkits ./matplotlib-images/mpl_toolkits-riscv64 || true
+          mv output-riscv64/matplotlib ./matplotlib-images/matplotlib-riscv64 || true
           tar -czvf matplotlib-images.tar.gz ./matplotlib-images
       - name: create release
         uses: ncipollo/release-action@v1
