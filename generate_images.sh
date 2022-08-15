@@ -7,8 +7,8 @@ cd ./matplotlib-$version
 patch -p1 < ../outputAllImagesOnTestFailure.patch
 sed -e 's|#system_freetype = False|system_freetype = True|' -e 's|#system_qhull = False|system_qhull = True|' mplsetup.cfg.template > mplsetup.cfg
 sed -i 's|#tests = False|tests = True|' mplsetup.cfg
-python3 setup.py build
-python3 setup.py install --skip-build
+python3 -m build --wheel --no-isolation --skip-dependency-check
+python3 -m installer dist/*.whl
 job_count_prelim=$(nproc)
 job_count=$((job_count_prelim<12 ? job_count_prelim : 12))
 python3 -m pytest -n $job_count --pyargs matplotlib mpl_toolkits.tests
