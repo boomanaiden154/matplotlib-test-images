@@ -24,6 +24,7 @@ apk add python3-dev \
 	py3-pillow \
 	py3-tz \
 	python3-tkinter \
-    alpine-sdk \
-    py3-build \
-    py3-installer
+	alpine-sdk \
+	py3-build \
+	py3-installer \
+	py3-contourpy
