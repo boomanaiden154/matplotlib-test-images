@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 apk add python3-dev \
 	gfortran \
 	py3-numpy-dev \

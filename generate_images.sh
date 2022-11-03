@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 version=$matplotlib_version
 curl -L https://github.com/matplotlib/matplotlib/archive/refs/tags/v$version.tar.gz > matplotlib-$version.tar.gz
 tar -xf matplotlib-$version.tar.gz
@@ -11,7 +12,7 @@ python3 -m build --wheel --no-isolation --skip-dependency-check
 python3 -m installer dist/*.whl
 job_count_prelim=$(nproc)
 job_count=$((job_count_prelim<12 ? job_count_prelim : 12))
-python3 -m pytest -n $job_count --pyargs matplotlib mpl_toolkits.tests
+python3 -m pytest -n $job_count --pyargs matplotlib mpl_toolkits.tests || :
 cd result_images
 find . -name *expected* -exec rm -rf {} \;
 find . -name *failed-diff* -exec rm -rf {} \;
