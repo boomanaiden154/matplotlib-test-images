@@ -1,7 +1,7 @@
 on: [push]
 
 env:
-  matplotlib_version: 3.6.2
+  matplotlib_version: 3.6.3
 
 jobs:
   build-arches:
