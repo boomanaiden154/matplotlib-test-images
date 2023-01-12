@@ -1,20 +1,9 @@
 #!/bin/sh
 set -e
-apk add python3-dev \
-	gfortran \
-	py3-numpy-dev \
-	freetype-dev \
-	libpng-dev \
-	tk-dev \
-	py3-setuptools \
-	qhull-dev \
-	py3-wheel \
-	py3-setuptools-scm-git-archive \
-	py3-pytest \
-	py3-pytest-xdist \
-	ttf-opensans \
-	py3-cairo \
+# deps from the APKBUILD
+apk add py3-cairo \
 	py3-certifi \
+	py3-contourpy \
 	py3-cycler \
 	py3-dateutil \
 	py3-fonttools \
@@ -25,7 +14,19 @@ apk add python3-dev \
 	py3-pillow \
 	py3-tz \
 	python3-tkinter \
-	alpine-sdk \
-	py3-build \
-	py3-installer \
-	py3-contourpy
+	freetype-dev \
+	gfortran \
+	libpng-dev \
+	py3-gpep517 \
+	py3-numpy-dev \
+	py3-setuptools \
+	py3-setuptools_scm \
+	py3-wheel \
+	python3-dev \
+	qhull-dev \
+	tk-dev \
+	font-opensans \
+	py3-pytest \
+	py3-pytest-xdist
+# other (normally) preinstalled build deps
+apk add alpine-sdk

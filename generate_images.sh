@@ -8,7 +8,10 @@ cd ./matplotlib-$version
 patch -p1 < ../outputAllImagesOnTestFailure.patch
 sed -e 's|#system_freetype = False|system_freetype = True|' -e 's|#system_qhull = False|system_qhull = True|' mplsetup.cfg.template > mplsetup.cfg
 sed -i 's|#tests = False|tests = True|' mplsetup.cfg
-python3 -m build --wheel --no-isolation --skip-dependency-check
+export SETUPTOOLS_SCM_PRETEND_VERSION=$pkgver
+gpep517 build-wheel \
+	--wheel-dir dist \
+	--output-fd 2
 python3 -m installer dist/*.whl
 job_count_prelim=$(nproc)
 job_count=$((job_count_prelim<12 ? job_count_prelim : 12))
