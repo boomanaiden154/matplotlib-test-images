@@ -27,6 +27,8 @@ apk add py3-cairo \
 	tk-dev \
 	font-opensans \
 	py3-pytest \
-	py3-pytest-xdist
+	py3-pytest-xdist \
+	py3-pybind11 \
+	py3-pybind11-dev
 # other (normally) preinstalled build deps
 apk add alpine-sdk
