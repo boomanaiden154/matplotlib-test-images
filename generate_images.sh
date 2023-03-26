@@ -12,30 +12,16 @@ export SETUPTOOLS_SCM_PRETEND_VERSION=$version
 gpep517 build-wheel \
 	--wheel-dir dist \
 	--output-fd 3 3>&1 >&2
-python3 -m installer dist/*.whl
-job_count_prelim=$(nproc)
-job_count=$((job_count_prelim<12 ? job_count_prelim : 12))
-python3 -m pytest -n $job_count --pyargs matplotlib mpl_toolkits.tests || :
+python3 -m venv --clear --without-pip --system-site-packages test-env
+test-env/bin/python3 -m installer dist/*.whl
+job_count=$(nproc)
+test-env/bin/python3 -m pytest -n $job_count --pyargs matplotlib || :
 cd result_images
 find . -name *expected* -exec rm -rf {} \;
 find . -name *failed-diff* -exec rm -rf {} \;
 find . -name "*\[*\]*" -exec rm -rf {} \;
-mpl_toolkits_folders="test_axes_grid
-    test_axes_grid1
-    test_axisartist_axis_artist
-    test_axisartist_axislines
-    test_axisartist_clip_path
-    test_axisartist_floating_axes
-    test_axisartist_grid_helper_curvelinear
-    test_mplot3d
-    "
 mkdir ../../output
-mkdir ../../output/mpl_toolkits
 mkdir ../../output/matplotlib
-for mpl_toolkit_folder in $mpl_toolkits_folders
-do
-    mv ./$mpl_toolkit_folder ../../output/mpl_toolkits/$mpl_toolkit_folder
-done
 for directory in ./*
 do
     mv $directory ../../output/matplotlib/$directory
